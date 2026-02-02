@@ -6,13 +6,11 @@ import (
 	"log/slog"
 	"os"
 	"path/filepath"
-	"runtime"
 	"runtime/debug"
 	"sync/atomic"
 	"time"
 
 	"github.com/beck-8/subs-check/app/monitor"
-	"github.com/beck-8/subs-check/assets"
 	"github.com/beck-8/subs-check/check"
 	"github.com/beck-8/subs-check/config"
 	"github.com/beck-8/subs-check/save"
@@ -76,15 +74,6 @@ func (app *App) Initialize() error {
 		if err := app.initHttpServer(); err != nil {
 			return fmt.Errorf("初始化HTTP服务器失败: %w", err)
 		}
-	}
-
-	if config.GlobalConfig.SubStorePort != "" {
-		if runtime.GOOS == "linux" && runtime.GOARCH == "386" {
-			slog.Warn("node不支持Linux 32位系统，不启动sub-store服务")
-		}
-		go assets.RunSubStoreService()
-		// 求等吗得，日志会按预期顺序输出
-		time.Sleep(500 * time.Millisecond)
 	}
 
 	// 启动内存监控
@@ -240,7 +229,6 @@ func (app *App) checkProxies() error {
 	slog.Info("检测完成")
 	save.SaveConfig(results)
 	utils.SendNotify(len(results))
-	utils.UpdateSubs()
 
 	// 执行回调脚本
 	utils.ExecuteCallback(len(results))

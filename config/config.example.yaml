@@ -35,7 +35,7 @@ download-mb: 20
 total-speed-limit: 0
 
 # 监听端口，用于直接返回节点信息，方便订阅转换
-# http://127.0.0.1:8199/all.yaml
+# http://127.0.0.1:8199/sub
 # 注意：为方便小白默认监听0.0.0.0:8199，请自行修改
 # 更新需重启程序
 listen-port: ":8199"
@@ -86,6 +86,13 @@ api-key: ""
 # 注意如果使用docker，目前docker使用的alpine，只有sh，不支持bash
 callback-script: ""
 
+# 规则文件URL，每次节点检查后自动拉取更新
+rule-yaml-url: "https://raw.githubusercontent.com/lingyuanzhicheng/subs-check-lite/master/assets/rule.yaml"
+
+# 是否启用 V2Ray 订阅转换
+# 访问地址:http://127.0.0.1:8199/sub/v2ray.txt  
+v2ray-subscription: false
+
 # 填写搭建的apprise API server 地址
 # https://notify.xxxx.us.kg/notify
 apprise-api-server: ""
@@ -98,34 +105,6 @@ recipient-url:
   # - dingtalk://xxxxxx@xxxxxxx
 # 自定义通知标题
 notify-title: "🔔 节点状态更新"
-
-# sub-store的启动端口，为空则不启动sub-store
-# 更新需重启程序，不可监听局域网IP，只有三种写法 :8299, 127.0.0.1:8299, 0.0.0.0:8299
-# sub-store-port: ":8299"
-sub-store-port: ":8299"
-# sub-store自定义访问路径，必须以/开头，后续访问订阅也要带上此路径
-# 设置path之后，还可以开启订阅分享功能，无需暴露真实的path
-# sub-store-path: "/path"
-sub-store-path: ""
-# 以下配置去查看sub-store相关的教程：https://hub.docker.com/r/xream/sub-store
-# sub-store同步gist定时任务
-# 定时任务指定时将订阅/文件上传到私有 Gist. 在前端, 叫做 同步 或 同步配置.
-# 55 23 * * * 每天 23 点 55 分(避开部分机场后端每天0点定时重启)
-sub-store-sync-cron: ""
-# 定时更新订阅
-# SUB_STORE_PRODUCE_CRON 在后台定时处理订阅. 格式为 0 */2 * * *,sub,a;0 */3 * * *,col,b
-# 即每 2 小时处理一次单条订阅 a, 每 3 小时处理一次组合订阅 b.
-sub-store-produce-cron: ""
-# sub-store推送服务地址
-# 例如：Brak: "SUB_STORE_PUSH_SERVICE=https://api.day.app/XXXXXXXXXXXX/[推送标题]/[推送内容]"
-# 注意：仅需修改 XXXXXXXXXXXX 为自己的 token，[推送标题]/[推送内容] 会被sub-store自动替换为对应的内容
-sub-store-push-service: ""
-
-
-# 覆写订阅的url，这个的作用是生成带指定规则的mihomo/clash.meta订阅链接
-# 防止网络不好，所以现在内置，依赖:8199端口
-# 如果你想替换其他的自定义覆写文件，自己命名后放在output目录，然后更改此URL后缀即可
-mihomo-overwrite-url: "http://127.0.0.1:8199/sub/ACL4SSR_Online_Full.yaml"
 
 # 保存方法
 # 目前支持的保存方法: r2, local, gist, webdav, s3
@@ -203,23 +182,37 @@ sub-urls:
   - "https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml"
   - "https://raw.githubusercontent.com/zhangkaiitugithub/passcro/main/speednodes.yaml"
   - "https://raw.githubusercontent.com/aiboboxx/v2rayfree/refs/heads/main/README.md"
-  - "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/snippets/nodes.meta.yml"
+  - "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.meta.yml"
   - "https://raw.githubusercontent.com/anaer/Sub/refs/heads/main/clash.yaml"
   - "https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/c.yaml"
+  - "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.yml"
   - "https://raw.githubusercontent.com/Ruk1ng001/freeSub/main/clash.yaml"
   - "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/main/all_configs.txt"
   - "https://raw.githubusercontent.com/ripaojiedian/freenode/main/clash"
   - "https://raw.githubusercontent.com/go4sharing/sub/main/sub.yaml"
-  - https://raw.githubusercontent.com/actionsfz/v2ray/refs/heads/master/all.yaml
-  - https://raw.githubusercontent.com/Pawdroid/Free-servers/refs/heads/main/sub
-  - https://raw.githubusercontent.com/aiboboxx/v2rayfree/refs/heads/main/v2
-  - https://raw.githubusercontent.com/acymz/AutoVPN/main/data/V2.txt
-  - https://raw.githubusercontent.com/ggborr/FREEE-VPN/refs/heads/main/6V2ray
-  - https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/wenode.txt
-  - https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/v2rayshare.txt
-  - https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/nodefree.txt
-  - https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/ndnode.txt
-  - https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/clashmeta.txt
-  - https://raw.githubusercontent.com/xiaoji235/airport-free/main/v2ray/v2rayshare.txt
-  - https://raw.githubusercontent.com/xiaoji235/airport-free/main/v2ray.txt
-  - https://raw.githubusercontent.com/xiaoji235/airport-free/main/clash/naidounode.txt
+  - "https://raw.githubusercontent.com/actionsfz/v2ray/refs/heads/master/all.yaml"
+  - "https://raw.githubusercontent.com/Pawdroid/Free-servers/refs/heads/main/sub"
+  - "https://raw.githubusercontent.com/aiboboxx/v2rayfree/refs/heads/main/v2"
+  - "https://raw.githubusercontent.com/acymz/AutoVPN/main/data/V2.txt"
+  - "https://raw.githubusercontent.com/ggborr/FREEE-VPN/refs/heads/main/6V2ray"
+  - "https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/wenode.txt"
+  - "https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/v2rayshare.txt"
+  - "https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/nodefree.txt"
+  - "https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/ndnode.txt"
+  - "https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/clashmeta.txt"
+  - "https://raw.githubusercontent.com/xiaoji235/airport-free/main/v2ray/v2rayshare.txt"
+  - "https://raw.githubusercontent.com/xiaoji235/airport-free/main/v2ray.txt"
+  - "https://raw.githubusercontent.com/xiaoji235/airport-free/main/clash/naidounode.txt"
+  - "https://raw.githubusercontent.com/ermaozi01/free_clash_vpn/main/subscribe/clash.yml"
+  - "https://raw.githubusercontent.com/ermaozi01/free_clash_vpn/main/subscribe/v2ray.txt"
+  - "https://raw.githubusercontent.com/ssrsub/ssr/master/v2ray"
+  - "https://raw.githubusercontent.com/ssrsub/ssr/master/clash.yaml"
+  - "https://raw.githubusercontent.com/barry-far/V2ray-config/main/All_Configs_Sub.txt"
+  - "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt"
+  - "https://raw.githubusercontent.com/mfuu/v2ray/master/v2ray"
+  - "https://raw.githubusercontent.com/4n0nymou3/multi-proxy-config-fetcher/refs/heads/main/configs/proxy_configs.txt"
+  - "https://raw.githubusercontent.com/ripaojiedian/freenode/main/sub"
+  - "https://raw.githubusercontent.com/ripaojiedian/freenode/main/clash"
+  - "https://raw.githubusercontent.com/roosterkid/openproxylist/main/HTTPS.txt"
+  - "https://raw.githubusercontent.com/roosterkid/openproxylist/main/SOCKS5.txt"
+  - "https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY.txt"

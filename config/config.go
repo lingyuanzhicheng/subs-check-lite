@@ -44,12 +44,6 @@ type Config struct {
 	AppriseApiServer     string   `yaml:"apprise-api-server"`
 	RecipientUrl         []string `yaml:"recipient-url"`
 	NotifyTitle          string   `yaml:"notify-title"`
-	SubStorePort         string   `yaml:"sub-store-port"`
-	SubStorePath         string   `yaml:"sub-store-path"`
-	SubStoreSyncCron     string   `yaml:"sub-store-sync-cron"`
-	SubStorePushService  string   `yaml:"sub-store-push-service"`
-	SubStoreProduceCron  string   `yaml:"sub-store-produce-cron"`
-	MihomoOverwriteUrl   string   `yaml:"mihomo-overwrite-url"`
 	MediaCheck           bool     `yaml:"media-check"`
 	Platforms            []string `yaml:"platforms"`
 	SuccessLimit         int32    `yaml:"success-limit"`
@@ -60,13 +54,15 @@ type Config struct {
 	GithubProxy          string   `yaml:"github-proxy"`
 	Proxy                string   `yaml:"proxy"`
 	CallbackScript       string   `yaml:"callback-script"`
+	RuleYamlUrl          string   `yaml:"rule-yaml-url"`
+	V2RaySubscription    bool     `yaml:"v2ray-subscription"`
 }
 
 var GlobalConfig = &Config{
 	// 新增配置，给未更改配置文件的用户一个默认值
 	ListenPort:         ":8199",
 	NotifyTitle:        "🔔 节点状态更新",
-	MihomoOverwriteUrl: "http://127.0.0.1:8199/sub/ACL4SSR_Online_Full.yaml",
+	RuleYamlUrl:        "https://raw.githubusercontent.com/lingyuanzhicheng/subs-check-lite/master/assets/rule.yaml",
 	Platforms:          []string{"openai", "youtube", "netflix", "disney", "gemini", "iprisk"},
 	DownloadMB:         20,
 }

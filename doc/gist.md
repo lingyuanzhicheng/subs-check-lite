@@ -27,12 +27,12 @@
 ## 获取订阅
 
 > 如果配置了Woker , 将 `key` 修改为对应的即可
-> 订阅格式为 `https://your-worker-url/gist?key=all.yaml&token=AUTH_TOKEN`
+> 订阅格式为 `https://your-worker-url/gist?key=node.yaml&token=AUTH_TOKEN`
 
 - yaml格式的订阅
 
 ```
-https://gist.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_GIST_ID/raw/all.yaml
+https://gist.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_GIST_ID/raw/node.yaml
 ```
 
 - base64编码的订阅

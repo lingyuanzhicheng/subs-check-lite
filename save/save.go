@@ -2,9 +2,7 @@ package save
 
 import (
 	"fmt"
-	"io"
 	"log/slog"
-	"net/http"
 
 	"github.com/beck-8/subs-check/check"
 	"github.com/beck-8/subs-check/config"
@@ -34,17 +32,7 @@ func NewConfigSaver(results []check.Result) *ConfigSaver {
 		saveMethod: chooseSaveMethod(),
 		categories: []ProxyCategory{
 			{
-				Name:    "all.yaml",
-				Proxies: make([]map[string]any, 0),
-				Filter:  func(result check.Result) bool { return true },
-			},
-			{
-				Name:    "mihomo.yaml",
-				Proxies: make([]map[string]any, 0),
-				Filter:  func(result check.Result) bool { return true },
-			},
-			{
-				Name:    "base64.txt",
+				Name:    "node.yaml",
 				Proxies: make([]map[string]any, 0),
 				Filter:  func(result check.Result) bool { return true },
 			},
@@ -90,6 +78,32 @@ func (cs *ConfigSaver) Save() error {
 		}
 	}
 
+	// 下载规则文件 (新增)
+	saver, err := method.NewLocalSaver()
+
+	if err != nil {
+		slog.Error(fmt.Sprintf("创建本地保存器失败: %v", err))
+	} else {
+		if err := utils.DownloadRuleYaml(saver.OutputPath); err != nil {
+			slog.Error(fmt.Sprintf("下载规则文件失败: %v", err))
+		}
+
+		// 合并 rule.yaml 和 node.yaml 生成 sub.yaml
+		if err := utils.MergeRuleAndNodeYaml(saver.OutputPath); err != nil {
+			slog.Error(fmt.Sprintf("合并规则文件失败: %v", err))
+		}
+
+		// 生成转换订阅 V2ray
+		if err := utils.ConvertToV2Ray(saver.OutputPath); err != nil {
+			slog.Error(fmt.Sprintf("转换 V2Ray 订阅失败: %v", err))
+		}
+
+		// 生成统计数据 JSON
+		if err := utils.GenerateStatsJSON(saver.OutputPath); err != nil {
+			slog.Error(fmt.Sprintf("生成统计数据失败: %v", err))
+		}
+	}
+
 	return nil
 }
 
@@ -111,7 +125,7 @@ func (cs *ConfigSaver) saveCategory(category ProxyCategory) error {
 		return nil
 	}
 
-	if category.Name == "all.yaml" {
+	if category.Name == "node.yaml" {
 		yamlData, err := yaml.Marshal(map[string]any{
 			"proxies": category.Proxies,
 		})
@@ -119,47 +133,6 @@ func (cs *ConfigSaver) saveCategory(category ProxyCategory) error {
 			return fmt.Errorf("序列化yaml %s 失败: %w", category.Name, err)
 		}
 		if err := cs.saveMethod(yamlData, category.Name); err != nil {
-			return fmt.Errorf("保存 %s 失败: %w", category.Name, err)
-		}
-		// 只在 all.yaml 和 local时，更新substore
-		if config.GlobalConfig.SaveMethod == "local" && config.GlobalConfig.SubStorePort != "" {
-			utils.UpdateSubStore(yamlData)
-		}
-		return nil
-	}
-	if category.Name == "mihomo.yaml" && config.GlobalConfig.SubStorePort != "" {
-		resp, err := http.Get(fmt.Sprintf("%s/api/file/%s", utils.BaseURL, utils.MihomoName))
-		if err != nil {
-			return fmt.Errorf("获取mihomo file请求失败: %w", err)
-		}
-		defer resp.Body.Close()
-		body, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return fmt.Errorf("读取mihomo file失败: %w", err)
-		}
-		if resp.StatusCode != http.StatusOK {
-			return fmt.Errorf("获取mihomo file失败, 状态码: %d, 错误信息: %s", resp.StatusCode, body)
-		}
-		if err := cs.saveMethod(body, category.Name); err != nil {
-			return fmt.Errorf("保存 %s 失败: %w", category.Name, err)
-		}
-		return nil
-	}
-	if category.Name == "base64.txt" && config.GlobalConfig.SubStorePort != "" {
-		// http://127.0.0.1:8299/download/sub?target=V2Ray
-		resp, err := http.Get(fmt.Sprintf("%s/download/%s?target=V2Ray", utils.BaseURL, utils.SubName))
-		if err != nil {
-			return fmt.Errorf("获取base64.txt请求失败: %w", err)
-		}
-		defer resp.Body.Close()
-		body, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return fmt.Errorf("读取base64.txt失败: %w", err)
-		}
-		if resp.StatusCode != http.StatusOK {
-			return fmt.Errorf("获取base64.txt失败，状态码: %d, 错误信息: %s", resp.StatusCode, body)
-		}
-		if err := cs.saveMethod(body, category.Name); err != nil {
 			return fmt.Errorf("保存 %s 失败: %w", category.Name, err)
 		}
 		return nil
