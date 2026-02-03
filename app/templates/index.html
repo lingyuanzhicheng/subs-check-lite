@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Subs Check Lite</title>
     <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -18,13 +26,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            overflow: hidden;
         }
 
         .container {
             text-align: center;
-            max-width: 800px;
-            width: 100%;
+            width: 800px;
+            flex-shrink: 0;
         }
 
         .title {
@@ -102,25 +110,11 @@
             line-height: 1.6;
             word-break: break-all;
         }
-
-        @media (max-width: 600px) {
-            .title {
-                font-size: 36px;
-            }
-            .status {
-                font-size: 20px;
-            }
-            .links,
-            .stats,
-            .list {
-                font-size: 12px;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="title"><span class="bracket"></span>[</span> <span class="text">Sub Check Lite</span> <span class="bracket">]</span></div>
+        <div class="title"><span class="bracket">[</span> <span class="text">Sub Check Lite</span> <span class="bracket">]</span></div>
         <div class="status">Service is running</div>
         
         <div class="links">
@@ -148,6 +142,23 @@
     </div>
 
     <script>
+        function scaleContainer() {
+            const container = document.querySelector('.container');
+            const containerWidth = 800;
+            const availableWidth = window.innerWidth;
+            
+            if (availableWidth < containerWidth) {
+                const scale = availableWidth / containerWidth;
+                container.style.transform = `scale(${scale})`;
+                container.style.transformOrigin = 'center center';
+            } else {
+                container.style.transform = 'none';
+            }
+        }
+
+        window.addEventListener('resize', scaleContainer);
+        window.addEventListener('load', scaleContainer);
+
         fetch('/sub/stats.json')
             .then(res => res.json())
             .then(data => {
@@ -185,11 +196,6 @@
             })
             .catch(err => {
                 console.error('加载 stats.json 失败:', err);
-                document.getElementById('nodes').textContent = 'Failed';
-                document.getElementById('mediaCheck').textContent = 'Failed';
-                document.getElementById('v2raySub').textContent = 'Failed';
-                document.getElementById('typesContainer').textContent = 'Protocol Types: Failed';
-                document.getElementById('countriesContainer').textContent = 'Node Countries: Failed';
             });
     </script>
 </body>
