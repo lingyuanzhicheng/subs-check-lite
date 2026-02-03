@@ -13,7 +13,7 @@ import (
 
 // StatsData 统计数据结构
 type StatsData struct {
-	TotalNodes        int            `json:"total_nodes"`
+	TotalNodes        int            `json:"nodes"`
 	Countries         map[string]int `json:"countries"`
 	Types             map[string]int `json:"types"`
 	V2RaySubscription bool           `json:"v2ray-subscription"`

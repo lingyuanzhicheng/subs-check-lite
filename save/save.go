@@ -78,21 +78,11 @@ func (cs *ConfigSaver) Save() error {
 		}
 	}
 
-	// 下载规则文件 (新增)
 	saver, err := method.NewLocalSaver()
 
 	if err != nil {
 		slog.Error(fmt.Sprintf("创建本地保存器失败: %v", err))
 	} else {
-		if err := utils.DownloadRuleYaml(saver.OutputPath); err != nil {
-			slog.Error(fmt.Sprintf("下载规则文件失败: %v", err))
-		}
-
-		// 合并 rule.yaml 和 node.yaml 生成 sub.yaml
-		if err := utils.MergeRuleAndNodeYaml(saver.OutputPath); err != nil {
-			slog.Error(fmt.Sprintf("合并规则文件失败: %v", err))
-		}
-
 		// 生成转换订阅 V2ray
 		if err := utils.ConvertToV2Ray(saver.OutputPath); err != nil {
 			slog.Error(fmt.Sprintf("转换 V2Ray 订阅失败: %v", err))

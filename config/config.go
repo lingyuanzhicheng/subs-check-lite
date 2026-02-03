@@ -54,20 +54,21 @@ type Config struct {
 	GithubProxy          string   `yaml:"github-proxy"`
 	Proxy                string   `yaml:"proxy"`
 	CallbackScript       string   `yaml:"callback-script"`
-	RuleYamlUrl          string   `yaml:"rule-yaml-url"`
 	V2RaySubscription    bool     `yaml:"v2ray-subscription"`
 }
 
 var GlobalConfig = &Config{
 	// 新增配置，给未更改配置文件的用户一个默认值
-	ListenPort:         ":8199",
-	NotifyTitle:        "🔔 节点状态更新",
-	RuleYamlUrl:        "https://raw.githubusercontent.com/lingyuanzhicheng/subs-check-lite/master/assets/rule.yaml",
-	Platforms:          []string{"openai", "youtube", "netflix", "disney", "gemini", "iprisk"},
-	DownloadMB:         20,
+	ListenPort:  ":8199",
+	NotifyTitle: "🔔 节点状态更新",
+	Platforms:   []string{"openai", "youtube", "netflix", "disney", "gemini", "iprisk"},
+	DownloadMB:  20,
 }
 
 //go:embed config.example.yaml
 var DefaultConfigTemplate []byte
+
+//go:embed rule.template.yaml
+var DefaultRuleTemplate []byte
 
 var GlobalProxies []map[string]any

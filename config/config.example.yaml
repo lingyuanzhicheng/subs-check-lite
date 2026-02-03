@@ -86,9 +86,6 @@ api-key: ""
 # 注意如果使用docker，目前docker使用的alpine，只有sh，不支持bash
 callback-script: ""
 
-# 规则文件URL，每次节点检查后自动拉取更新
-rule-yaml-url: "https://raw.githubusercontent.com/lingyuanzhicheng/subs-check-lite/master/assets/rule.yaml"
-
 # 是否启用 V2Ray 订阅转换
 # 访问地址:http://127.0.0.1:8199/sub/v2ray.txt  
 v2ray-subscription: false

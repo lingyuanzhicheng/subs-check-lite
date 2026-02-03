@@ -24,6 +24,18 @@ func (app *App) initConfigPath() error {
 		}
 
 		app.configPath = filepath.Join(configDir, "config.yaml")
+
+		ruleTemplatePath := filepath.Join(configDir, "rule.template.yaml")
+		rulePath := filepath.Join(configDir, "rule.yaml")
+
+		if _, err := os.Stat(rulePath); os.IsNotExist(err) {
+			if _, err := os.Stat(ruleTemplatePath); err == nil {
+				if err := os.WriteFile(rulePath, []byte(config.DefaultRuleTemplate), 0644); err != nil {
+					return fmt.Errorf("写入默认规则文件失败: %w", err)
+				}
+				slog.Info("默认规则文件创建成功")
+			}
+		}
 	}
 	return nil
 }
