@@ -1,21 +1,11 @@
 proxy-groups:
+
   - name: 🚀 节点选择
     type: select
     proxies:
       - 🚀 手动切换
       - ♻️ 自动选择
-      - 🇨🇦 加拿大
-      - 🇩🇪 德国
-      - 🇫🇷 法国
-      - 🇬🇧 英国
-      - 🇭🇰 香港
-      - 🇯🇵 日本
-      - 🇳🇱 荷兰
-      - 🇵🇱 波兰
-      - 🇷🇺 俄罗斯
-      - 🇸🇬 新加坡
-      - 🇺🇸 美国
-      - 🇻🇳 越南
+      - {countries.name.list}
       - DIRECT
   - name: 🚀 手动切换
     include-all: true
@@ -25,249 +15,19 @@ proxy-groups:
     include-all: true
     interval: 300
     tolerance: 50
-  - name: 📲 电报消息
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🚀 手动切换
-      - ♻️ 自动选择
-      - 🇨🇦 加拿大
-      - 🇩🇪 德国
-      - 🇫🇷 法国
-      - 🇬🇧 英国
-      - 🇭🇰 香港
-      - 🇯🇵 日本
-      - 🇳🇱 荷兰
-      - 🇵🇱 波兰
-      - 🇷🇺 俄罗斯
-      - 🇸🇬 新加坡
-      - 🇺🇸 美国
-      - 🇻🇳 越南
-      - DIRECT
-  - name: 💬 Ai平台
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🚀 手动切换
-      - ♻️ 自动选择
-      - 🇨🇦 加拿大
-      - 🇩🇪 德国
-      - 🇫🇷 法国
-      - 🇬🇧 英国
-      - 🇭🇰 香港
-      - 🇯🇵 日本
-      - 🇳🇱 荷兰
-      - 🇵🇱 波兰
-      - 🇷🇺 俄罗斯
-      - 🇸🇬 新加坡
-      - 🇺🇸 美国
-      - 🇻🇳 越南
-      - OpenAI
-      - Gemini
-      - DIRECT
-  - name: 📹 油管视频
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🚀 手动切换
-      - ♻️ 自动选择
-      - 🇨🇦 加拿大
-      - 🇩🇪 德国
-      - 🇫🇷 法国
-      - 🇬🇧 英国
-      - 🇭🇰 香港
-      - 🇯🇵 日本
-      - 🇳🇱 荷兰
-      - 🇵🇱 波兰
-      - 🇷🇺 俄罗斯
-      - 🇸🇬 新加坡
-      - 🇺🇸 美国
-      - 🇻🇳 越南
-      - YouTube
-      - DIRECT
-  - name: 🎥 奈飞视频
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🚀 手动切换
-      - ♻️ 自动选择
-      - 🇨🇦 加拿大
-      - 🇩🇪 德国
-      - 🇫🇷 法国
-      - 🇬🇧 英国
-      - 🇭🇰 香港
-      - 🇯🇵 日本
-      - 🇳🇱 荷兰
-      - 🇵🇱 波兰
-      - 🇷🇺 俄罗斯
-      - 🇸🇬 新加坡
-      - 🇺🇸 美国
-      - 🇻🇳 越南
-      - Netflix
-      - DIRECT
-  - name: 📺 巴哈姆特
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🚀 手动切换
-      - 🇨🇳 台湾
-      - DIRECT
-  - name: 📺 哔哩哔哩
-    type: select
-    proxies:
-      - 🎯 全球直连
-      - 🇨🇳 台湾
-      - 🇭🇰 香港
-      - DIRECT
-  - name: 🌍 国外媒体
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🚀 手动切换
-      - ♻️ 自动选择
-      - 🇨🇦 加拿大
-      - 🇩🇪 德国
-      - 🇫🇷 法国
-      - 🇬🇧 英国
-      - 🇭🇰 香港
-      - 🇯🇵 日本
-      - 🇳🇱 荷兰
-      - 🇵🇱 波兰
-      - 🇷🇺 俄罗斯
-      - 🇸🇬 新加坡
-      - 🇺🇸 美国
-      - 🇻🇳 越南
-      - DIRECT
-  - name: 🌏 国内媒体
-    type: select
-    proxies:
-      - 🚀 手动切换
-      - 🇭🇰 香港
-      - 🇨🇳 台湾
-      - 🇸🇬 新加坡
-      - 🇯🇵 日本
-      - DIRECT
-  - name: 📢 谷歌FCM
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🚀 手动切换
-      - 🇨🇦 加拿大
-      - 🇩🇪 德国
-      - 🇫🇷 法国
-      - 🇬🇧 英国
-      - 🇭🇰 香港
-      - 🇯🇵 日本
-      - 🇳🇱 荷兰
-      - 🇵🇱 波兰
-      - 🇷🇺 俄罗斯
-      - 🇸🇬 新加坡
-      - 🇺🇸 美国
-      - 🇻🇳 越南
-      - DIRECT
-  - name: Ⓜ️ 微软Bing
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🚀 手动切换
-      - 🇨🇦 加拿大
-      - 🇩🇪 德国
-      - 🇫🇷 法国
-      - 🇬🇧 英国
-      - 🇭🇰 香港
-      - 🇯🇵 日本
-      - 🇳🇱 荷兰
-      - 🇵🇱 波兰
-      - 🇷🇺 俄罗斯
-      - 🇸🇬 新加坡
-      - 🇺🇸 美国
-      - 🇻🇳 越南
-      - DIRECT
-  - name: Ⓜ️ 微软云盘
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🚀 手动切换
-      - 🇨🇦 加拿大
-      - 🇩🇪 德国
-      - 🇫🇷 法国
-      - 🇬🇧 英国
-      - 🇭🇰 香港
-      - 🇯🇵 日本
-      - 🇳🇱 荷兰
-      - 🇵🇱 波兰
-      - 🇷🇺 俄罗斯
-      - 🇸🇬 新加坡
-      - 🇺🇸 美国
-      - 🇻🇳 越南
-      - DIRECT
-  - name: Ⓜ️ 微软服务
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🚀 手动切换
-      - 🇨🇦 加拿大
-      - 🇩🇪 德国
-      - 🇫🇷 法国
-      - 🇬🇧 英国
-      - 🇭🇰 香港
-      - 🇯🇵 日本
-      - 🇳🇱 荷兰
-      - 🇵🇱 波兰
-      - 🇷🇺 俄罗斯
-      - 🇸🇬 新加坡
-      - 🇺🇸 美国
-      - 🇻🇳 越南
-      - DIRECT
-  - name: 🍎 苹果服务
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🚀 手动切换
-      - 🇨🇦 加拿大
-      - 🇩🇪 德国
-      - 🇫🇷 法国
-      - 🇬🇧 英国
-      - 🇭🇰 香港
-      - 🇯🇵 日本
-      - 🇳🇱 荷兰
-      - 🇵🇱 波兰
-      - 🇷🇺 俄罗斯
-      - 🇸🇬 新加坡
-      - 🇺🇸 美国
-      - 🇻🇳 越南
-      - DIRECT
-  - name: 🎮 游戏平台
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🚀 手动切换
-      - 🇨🇦 加拿大
-      - 🇩🇪 德国
-      - 🇫🇷 法国
-      - 🇬🇧 英国
-      - 🇭🇰 香港
-      - 🇯🇵 日本
-      - 🇳🇱 荷兰
-      - 🇵🇱 波兰
-      - 🇷🇺 俄罗斯
-      - 🇸🇬 新加坡
-      - 🇺🇸 美国
-      - 🇻🇳 越南
-      - DIRECT
-  - name: 🎶 网易音乐
-    type: select
-    include-all: true
-    filter: (?i)网易|NetEase
-    proxies:
-      - 🚀 节点选择
-      - ♻️ 自动选择
-      - DIRECT
   - name: 🎯 全球直连
     type: select
     proxies:
       - 🚀 节点选择
       - ♻️ 自动选择
+      - DIRECT
+  - name: 🐟 漏网之鱼
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🚀 手动切换
+      - ♻️ 自动选择
+      - {countries.name.list}
       - DIRECT
   - name: 🛑 广告拦截
     type: select
@@ -279,193 +39,120 @@ proxy-groups:
     proxies:
       - REJECT
       - DIRECT
-  - name: 🐟 漏网之鱼
+  - name: 🌍 国外媒体
     type: select
     proxies:
       - 🚀 节点选择
       - 🚀 手动切换
       - ♻️ 自动选择
-      - 🇨🇦 加拿大
-      - 🇩🇪 德国
-      - 🇫🇷 法国
-      - 🇬🇧 英国
-      - 🇭🇰 香港
-      - 🇯🇵 日本
-      - 🇳🇱 荷兰
-      - 🇵🇱 波兰
-      - 🇷🇺 俄罗斯
-      - 🇸🇬 新加坡
-      - 🇺🇸 美国
-      - 🇻🇳 越南
+      - {countries.name.list}
       - DIRECT
-  - name: 🇦🇪 阿联酋
+  - name: 🌏 国内媒体
+    type: select
+    proxies:
+      - 🚀 手动切换
+      - {countries.name.list}
+      - DIRECT
+  - name: 📲 电报消息
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🚀 手动切换
+      - ♻️ 自动选择
+      - {countries.name.list}
+      - DIRECT
+  - name: 💬 Ai平台
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🚀 手动切换
+      - ♻️ 自动选择
+      - {countries.name.list}
+      - DIRECT
+  - name: 📹 油管视频
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🚀 手动切换
+      - ♻️ 自动选择
+      - {countries.name.list}
+      - DIRECT
+  - name: 🎥 奈飞视频
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🚀 手动切换
+      - ♻️ 自动选择
+      - {countries.name.list}
+      - DIRECT
+  - name: 📺 巴哈姆特
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🚀 手动切换
+      - {countries.name.list}
+      - DIRECT
+  - name: 📢 谷歌FCM
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🚀 手动切换
+      - {countries.name.list}
+      - DIRECT
+  - name: Ⓜ️ 微软Bing
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🚀 手动切换
+      - {countries.name.list}
+      - DIRECT
+  - name: Ⓜ️ 微软云盘
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🚀 手动切换
+      - {countries.name.list}
+      - DIRECT
+  - name: Ⓜ️ 微软服务
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🚀 手动切换
+      - {countries.name.list}
+      - DIRECT
+  - name: 🍎 苹果服务
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🚀 手动切换
+      - {countries.name.list}
+      - DIRECT
+  - name: 🎮 游戏平台
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🚀 手动切换
+      - {countries.name.list}
+      - DIRECT
+  - name: 🎶 网易音乐
+    type: select
     include-all: true
-    filter: (?i)🇦🇪|阿联酋|AE_|United Arab Emirates
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇦🇲 亚美尼亚
-    include-all: true
-    filter: (?i)🇦🇲|亚美尼亚|AM_|Armenia
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇧🇪 比利时
-    include-all: true
-    filter: (?i)🇧🇪|比利时|BE_|Belgium
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇨🇦 加拿大
-    include-all: true
-    filter: (?i)🇨🇦|加拿大|CA_|Canada
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇩🇪 德国
-    include-all: true
-    filter: (?i)🇩🇪|德国|DE_|Germany
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇫🇮 芬兰
-    include-all: true
-    filter: (?i)🇫🇮|芬兰|FI_|Finland
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇫🇷 法国
-    include-all: true
-    filter: (?i)🇫🇷|法国|FR_|France
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇬🇧 英国
-    include-all: true
-    filter: (?i)🇬🇧|英国|GB_|United Kiongdom
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇭🇰 香港
-    include-all: true
-    filter: (?i)🇭🇰|香港|HK_|Hong Kong
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇮🇳 印度
-    include-all: true
-    filter: (?i)🇮🇳|印度|IN_|India
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇯🇵 日本
-    include-all: true
-    filter: (?i)🇯🇵|日本|JP_|Japan
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇰🇷 韩国
-    include-all: true
-    filter: (?i)🇰🇷|韩国|KR_|Korea
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇰🇿 哈萨克斯坦
-    include-all: true
-    filter: (?i)🇰🇿|哈萨克斯坦|KZ_|Kazakstan
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇱🇻 拉脱维亚
-    include-all: true
-    filter: (?i)🇱🇻|拉脱维亚|LV_|Latvia
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇲🇾 马来西亚
-    include-all: true
-    filter: (?i)🇲🇾|马来西亚|MY_|Malaysia
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇳🇱 荷兰
-    include-all: true
-    filter: (?i)🇳🇱|荷兰|NL_|Netherlands
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇵🇱 波兰
-    include-all: true
-    filter: (?i)🇵🇱|波兰|PL_|Poland
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇷🇺 俄罗斯
-    include-all: true
-    filter: (?i)🇷🇺|俄罗斯|RU_|Russia
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇸🇬 新加坡
-    include-all: true
-    filter: (?i)🇸🇬|新加坡|SG_|Singapore
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇨🇳 台湾
-    include-all: true
-    filter: (?i)🇹🇼|台湾|TW_|Taiwan
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇺🇸 美国
-    include-all: true
-    filter: (?i)🇺🇸|美国|US_|United States
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: 🇻🇳 越南
-    include-all: true
-    filter: (?i)🇻🇳|越南|VN_|Vietnam
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: TikTok
-    include-all: true
-    filter: (?i)抖音|TK-|TikTok
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: YouTube
-    include-all: true
-    filter: (?i)油管|YT-|YouTube
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: Netflix
-    include-all: true
-    filter: (?i)奈菲|NF|Netflix
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: Disney
-    include-all: true
-    filter: (?i)迪士尼|D+|Disney
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: OpenAI
-    include-all: true
-    filter: (?i)GPT|OpenAI
-    type: url-test
-    interval: 300
-    tolerance: 50
-  - name: Gemini
-    include-all: true
-    filter: (?i)GM|Gemini
-    type: url-test
-    interval: 300
-    tolerance: 50
+    filter: (?i)网易|NetEase
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - DIRECT
+  - name: 📺 哔哩哔哩
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+      - DIRECT
+
+  - {countries.list}
+    
+  - {media.list}
 
 rule-providers:
   LocalAreaNetwork:

@@ -194,20 +194,23 @@ notify-title: "🔔 节点状态更新"
 **🚀 通用订阅**
 ```bash
 
-# Clash 节点
+# Clash 节点订阅
 http://ip:port/node
 
-# V2ray 订阅
+# V2ray 节点订阅
 http://ip:port/v2ray
 
-# Clash 规则推荐
+# Clash 规则订阅
 http://ip:port/rule
 
-# Clash 节点（订阅）
+# Clash 节点订阅
 http://ip:port/sub/node.yaml
 
-# V2ray 订阅
+# V2ray 节点订阅
 http://ip:port/sub/v2ray.txt
+
+# Clash 规则订阅
+http://ip:port/sub/rule.yaml
 ```
 
 </details>

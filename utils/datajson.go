@@ -34,7 +34,7 @@ func GenerateStatsJSON(outputPath string) error {
 	}
 
 	var proxiesData ProxiesYAML
-	if err := yaml.Unmarshal(yamlData, &proxiesData); err != nil {
+	if err = yaml.Unmarshal(yamlData, &proxiesData); err != nil {
 		return fmt.Errorf("解析 YAML 失败: %w", err)
 	}
 

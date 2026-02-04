@@ -8,13 +8,11 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
-	"path/filepath"
 	"time"
 
 	"github.com/beck-8/subs-check/check"
 	"github.com/beck-8/subs-check/config"
 	"github.com/beck-8/subs-check/save/method"
-	"github.com/beck-8/subs-check/utils"
 	"github.com/gin-gonic/gin"
 	"gopkg.in/yaml.v3"
 )
@@ -30,9 +28,8 @@ func (app *App) initHttpServer() error {
 	}
 
 	// 静态文件路由 - 订阅服务相关，始终启用
-	// 最初不应该不带路径，现在保持兼容
 	router.StaticFile("/node", saver.OutputPath+"/node.yaml")
-	router.StaticFile("/rule", filepath.Join(utils.GetConfigDir(), "rule.yaml"))
+	router.StaticFile("/sub", saver.OutputPath+"/sub.yaml")
 	router.StaticFile("/v2ray", saver.OutputPath+"/v2ray.txt")
 
 	router.Static("/sub/", saver.OutputPath)

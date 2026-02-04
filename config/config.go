@@ -71,4 +71,7 @@ var DefaultConfigTemplate []byte
 //go:embed rule.template.yaml
 var DefaultRuleTemplate []byte
 
+//go:embed countries.json
+var DefaultCountriesTemplate []byte
+
 var GlobalProxies []map[string]any

@@ -3,6 +3,7 @@ package save
 import (
 	"fmt"
 	"log/slog"
+	"path/filepath"
 
 	"github.com/beck-8/subs-check/check"
 	"github.com/beck-8/subs-check/config"
@@ -86,11 +87,22 @@ func (cs *ConfigSaver) Save() error {
 		// 生成转换订阅 V2ray
 		if err := utils.ConvertToV2Ray(saver.OutputPath); err != nil {
 			slog.Error(fmt.Sprintf("转换 V2Ray 订阅失败: %v", err))
+		} else {
+			slog.Info("V2Ray 订阅转换成功", "filepath", filepath.Join(saver.OutputPath, "v2ray.txt"))
 		}
 
 		// 生成统计数据 JSON
 		if err := utils.GenerateStatsJSON(saver.OutputPath); err != nil {
 			slog.Error(fmt.Sprintf("生成统计数据失败: %v", err))
+		} else {
+			slog.Info("统计数据生成成功", "filepath", filepath.Join(saver.OutputPath, "stats.json"))
+		}
+
+		// 生成 sub.yaml
+		if err := utils.GenerateSubYAML(saver.OutputPath); err != nil {
+			slog.Error(fmt.Sprintf("生成 sub.yaml 失败: %v", err))
+		} else {
+			slog.Info("sub.yaml 合并成功", "filepath", filepath.Join(saver.OutputPath, "sub.yaml"))
 		}
 	}
 

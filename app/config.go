@@ -25,16 +25,30 @@ func (app *App) initConfigPath() error {
 
 		app.configPath = filepath.Join(configDir, "config.yaml")
 
-		ruleTemplatePath := filepath.Join(configDir, "rule.template.yaml")
 		rulePath := filepath.Join(configDir, "rule.yaml")
 
-		if _, err := os.Stat(rulePath); os.IsNotExist(err) {
-			if _, err := os.Stat(ruleTemplatePath); err == nil {
-				if err := os.WriteFile(rulePath, []byte(config.DefaultRuleTemplate), 0644); err != nil {
-					return fmt.Errorf("写入默认规则文件失败: %w", err)
-				}
-				slog.Info("默认规则文件创建成功")
+		// 检查并创建 config.yaml
+		if _, err := os.Stat(app.configPath); os.IsNotExist(err) {
+			if err := os.WriteFile(app.configPath, []byte(config.DefaultConfigTemplate), 0644); err != nil {
+				return fmt.Errorf("写入默认配置文件失败: %w", err)
 			}
+			slog.Info("默认配置文件创建成功", "filepath", app.configPath)
+			slog.Info("请编辑配置文件后重新启动程序")
+			os.Exit(0)
+		} else {
+			slog.Info("配置文件已存在，跳过创建", "filepath", app.configPath)
+		}
+
+		// 检查并创建 rule.yaml
+		if _, err := os.Stat(rulePath); os.IsNotExist(err) {
+			if err := os.WriteFile(rulePath, []byte(config.DefaultRuleTemplate), 0644); err != nil {
+				return fmt.Errorf("写入默认规则文件失败: %w", err)
+			}
+			slog.Info("默认规则文件创建成功", "filepath", rulePath)
+			slog.Info("请编辑规则文件后重新启动程序")
+			os.Exit(0)
+		} else {
+			slog.Info("规则文件已存在，跳过创建", "filepath", rulePath)
 		}
 	}
 	return nil
@@ -44,9 +58,6 @@ func (app *App) initConfigPath() error {
 func (app *App) loadConfig() error {
 	yamlFile, err := os.ReadFile(app.configPath)
 	if err != nil {
-		if os.IsNotExist(err) {
-			return app.createDefaultConfig()
-		}
 		return fmt.Errorf("读取配置文件失败: %w", err)
 	}
 
@@ -55,20 +66,6 @@ func (app *App) loadConfig() error {
 	}
 
 	slog.Info("配置文件读取成功")
-	return nil
-}
-
-// createDefaultConfig 创建默认配置文件
-func (app *App) createDefaultConfig() error {
-	slog.Info("配置文件不存在，创建默认配置文件")
-
-	if err := os.WriteFile(app.configPath, []byte(config.DefaultConfigTemplate), 0644); err != nil {
-		return fmt.Errorf("写入默认配置文件失败: %w", err)
-	}
-
-	slog.Info("默认配置文件创建成功")
-	slog.Info(fmt.Sprintf("请编辑配置文件: %s", app.configPath))
-	os.Exit(0)
 	return nil
 }
 
